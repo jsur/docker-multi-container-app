@@ -59,7 +59,7 @@ app.post('/values', async (req, res) => {
     return res.status(400).send('Index not a number')
   }
 
-  if (parseInt(index) < 40) {
+  if (parseInt(index) > 40) {
     return res.status(422).send('Index too high')
   }
 

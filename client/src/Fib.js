@@ -30,7 +30,10 @@ class Fib extends Component {
     await axios.post('/api/values', {
       index: this.state.index
     })
-    this.setState({ index: '' })
+    this.setState({ index: '' }, () => {
+      this.fetchIndexes().catch(error => console.log('error in this.fetchIndexes()', error))
+      this.fetchValues().catch(error => console.log('error in this.fetchValues()', error))
+    })
   }
 
   renderSeenIndexes() {
