@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t jsur/docker-multi-container-app -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run jsur/docker-multi-container-app npm test -- --coverage
+
+after_success:
+  - docker build -t jsur/docker-multi-client ./client
+  - docker build -t jsur/docker-multi-nginx ./nginx
+  - docker build -t jsur/docker-multi-server ./server
+  - docker build -t jsur/docker-multi-worker ./worker
+  # Login to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take images and push to docker hub
+  - docker push jsur/docker-multi-client
+  - docker push jsur/docker-multi-nginx
+  - docker push jsur/docker-multi-server
+  - docker push jsur/docker-multi-worker
