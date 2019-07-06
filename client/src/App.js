@@ -9,6 +9,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
+          <p style={{ color: 'white' }}>This change was pushed to test build and deployment pipeline with github, travis and AWS</p>
           <Link to="/">Home</Link>
           <Link to="/otherpage">Other page</Link>
         </header>
