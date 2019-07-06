@@ -20,3 +20,16 @@ after_success:
   - docker push jsur/docker-multi-nginx
   - docker push jsur/docker-multi-server
   - docker push jsur/docker-multi-worker
+
+deploy:
+  provide: elasticbeanstalk
+  region: us-east-1
+  app: docker-multi
+  env: DockerMulti-env
+  bucket_name: elasticbeanstalk-us-east-1-566312720731
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
