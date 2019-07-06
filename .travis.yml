@@ -22,7 +22,7 @@ after_success:
   - docker push jsur/docker-multi-worker
 
 deploy:
-  provide: elasticbeanstalk
+  provider: elasticbeanstalk
   region: us-east-1
   app: docker-multi
   env: DockerMulti-env
